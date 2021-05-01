@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.circularreveal.CircularRevealRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/game"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".game_main">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:alpha="0.3"
+        android:background="@color/white"></RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/player_money"
+        android:contentDescription="@string/none"
+        android:src="@drawable/player_stand" />
+
+    <TextView
+        android:id="@+id/player_attack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/player_money"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="50dp"
+        android:text="@string/none" />
+
+    <TextView
+        android:id="@+id/player_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/none" />
+
+    <Button
+        android:id="@+id/buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/player_money"
+        android:layout_alignParentEnd="true"
+        android:text="@string/none" />
+
+
+    <ImageView
+        android:id="@+id/monster"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/none"
+        android:src="@drawable/player_stand" />
+
+    <ImageView
+        android:id="@+id/player"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignStart="@+id/monster"
+        android:layout_alignBottom="@+id/monster"
+        android:contentDescription="@string/none"
+        android:src="@drawable/player_stand" />
+
+    <TextView
+        android:id="@+id/chapter_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="@string/none"
+        android:textColor="#ff0000"
+        android:textSize="25sp" />
+
+    <ProgressBar
+        android:id="@+id/progress_blood"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignTop="@+id/monster_blood"
+        android:layout_alignBottom="@+id/monster_blood"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="80dp"
+        android:max="10000"
+        android:progress="5000" />
+
+    <TextView
+        android:id="@+id/monster_blood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="@string/none" />
+
+</com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+
