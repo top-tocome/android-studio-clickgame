@@ -21,7 +21,7 @@
         android:layout_height="50dp"
         android:layout_alignBottom="@+id/player_money"
         android:contentDescription="@string/none"
-        android:src="@drawable/player_stand" />
+        android:src="@mipmap/player_stand" />
 
     <TextView
         android:id="@+id/player_attack"
@@ -57,7 +57,7 @@
         android:layout_height="200dp"
         android:layout_centerInParent="true"
         android:contentDescription="@string/none"
-        android:src="@drawable/player_stand" />
+        android:src="@mipmap/player_stand" />
 
     <ImageView
         android:id="@+id/player"
@@ -66,7 +66,7 @@
         android:layout_alignStart="@+id/monster"
         android:layout_alignBottom="@+id/monster"
         android:contentDescription="@string/none"
-        android:src="@drawable/player_stand" />
+        android:src="@mipmap/player_stand" />
 
     <TextView
         android:id="@+id/chapter_num"
@@ -102,5 +102,65 @@
         android:layout_marginTop="100dp"
         android:text="@string/none" />
 
+    <TextView
+        android:id="@+id/damage0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/monster"
+        android:layout_alignEnd="@+id/monster"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/none"
+        android:textColor="#ff0000 "
+        android:textSize="25sp"
+        android:alpha="0"/>
+    <TextView
+        android:id="@+id/damage1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/monster"
+        android:layout_alignEnd="@+id/monster"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/none"
+        android:textColor="#ff0000 "
+        android:textSize="25sp"
+        android:alpha="0"/>
+    <TextView
+        android:id="@+id/damage2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/monster"
+        android:layout_alignEnd="@+id/monster"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/none"
+        android:textColor="#ff0000 "
+        android:textSize="25sp"
+        android:alpha="0"/>
+    <TextView
+        android:id="@+id/damage3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/monster"
+        android:layout_alignEnd="@+id/monster"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/none"
+        android:textColor="#ff0000 "
+        android:textSize="25sp"
+        android:alpha="0"/>
+    <TextView
+        android:id="@+id/damage4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/monster"
+        android:layout_alignEnd="@+id/monster"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/none"
+        android:textColor="#ff0000 "
+        android:textSize="25sp"
+        android:alpha="0"/>
 </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 

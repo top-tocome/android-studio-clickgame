@@ -1,16 +1,13 @@
 package tocome.clickgame;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,6 +27,7 @@ public class game_main extends AppCompatActivity {
     ImageView monsterimg;
     ProgressBar progressBar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +37,6 @@ public class game_main extends AppCompatActivity {
         Init();
         setUI();
         setListener();
-        updatePage();
 
     }
 
@@ -59,24 +56,121 @@ public class game_main extends AppCompatActivity {
         }
     }
 
+
+    void getUI() {
+        layout = findViewById(R.id.game);
+        m_blood = findViewById(R.id.monster_blood);
+        p_attack = findViewById(R.id.player_attack);
+        p_money = findViewById(R.id.player_money);
+        chapter_num = findViewById(R.id.chapter_num);
+        buy = findViewById(R.id.buy);
+        playerimg = findViewById(R.id.player);
+        monsterimg = findViewById(R.id.monster);
+        progressBar = findViewById(R.id.progress_blood);
+
+    }
+
+    Anime damage_anime;
+
     void Init() {
 
         monster = new Monster(0, 50);
         player = new Player(1, 0);
         chapter = Resourse.chapters[0];
+
         getdata();
         chapter.playbgm(game_main.this);
         player.setKickmusic(game_main.this);
-    }
 
+        TextView[] damagetemp = new TextView[Resourse.damage_temp.length];
+        for (int i = 0; i < Resourse.damage_temp.length; i++) {
+            damagetemp[i] = findViewById(Resourse.damage_temp[i]);
+        }
+        damage_anime = new Anime(damagetemp, R.anim.damage, game_main.this);
+    }
 
     void setUI() {
         buy.setText(new String("升级￥" + player.attack));
-        layout.setBackgroundResource(chapter.bg);
-        monsterimg.setImageResource(Resourse.monsters[monster.num]);
+        p_attack.setText(String.valueOf("攻击力：" + player.attack));
         chapter_num.setText(new String(Chapter.turn + "周目" + "第" + (chapter.num + 1) + "章"));
 
+        layout.setBackgroundResource(chapter.bg);
+        monsterimg.setImageResource(Resourse.monsters[monster.num]);
+        updatePage();
     }
+
+
+    void updatePage() {
+        m_blood.setText(String.valueOf(monster.blood + "/" + monster.maxblood));
+        p_money.setText(String.valueOf("金钱：￥" + player.money));
+        progressBar.setProgress((int) (progressBar.getMax() * monster.blood / monster.maxblood));
+    }
+
+
+    void setListener() {
+        layout.setOnTouchListener(new View.OnTouchListener() {
+            long time = 0;
+
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getActionMasked()) {
+
+                    case MotionEvent.ACTION_DOWN:
+                    case MotionEvent.ACTION_POINTER_DOWN:
+                        //限制点击速度
+                        if (System.currentTimeMillis() - time < 100) return false;
+                        else time = System.currentTimeMillis();
+                        //攻击事件
+                        monster = player.attack(monster);
+                        playerimg.setImageResource(Resourse.player_attack[(int) (Math.random() * Resourse.player_attack.length)]);
+                        damage_anime.start(player.damage);
+                        //死亡事件
+                        if (monster.isdead()) {
+                            monster = monster.nextmonster(player.attack);
+                            monsterimg.setImageResource(Resourse.monsters[monster.num]);
+                            if (monster.num == 0) {//下一章
+                                chapter = chapter.nextchapter();
+                                layout.setBackgroundResource(chapter.bg);
+                                if (chapter.num == 0) {//下一周目
+                                    Chapter.turn++;
+                                }
+                                chapter_num.setText(new String(Chapter.turn + "周目" + "第" + (chapter.num + 1) + "章"));
+                                chapter.playbgm(game_main.this);
+                            }
+                            savedata();
+                        }
+
+                        updatePage();
+
+                        return true;
+
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_POINTER_UP:
+                        playerimg.setImageResource(R.mipmap.player_stand);
+                        return true;
+
+                    case MotionEvent.ACTION_MOVE:
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                while (player.attackup()) {
+                }
+                buy.setText(new String("升级￥" + player.attack));
+                p_attack.setText(String.valueOf("攻击力：" + player.attack));
+                p_money.setText(String.valueOf("金钱：￥" + player.money));
+            }
+        });
+
+
+    }
+
 
     void getdata() {
         SharedPreferences sp = getSharedPreferences("data", MODE_PRIVATE);
@@ -101,79 +195,5 @@ public class game_main extends AppCompatActivity {
         editor.putLong("player.attack", player.attack);
         editor.putLong("player.money", player.money);
         editor.apply();
-    }
-
-    void updatePage() {
-        m_blood.setText(String.valueOf(monster.blood + "/" + monster.maxblood));
-        p_attack.setText(String.valueOf("攻击力：" + player.attack));
-        p_money.setText(String.valueOf("金钱：￥" + player.money));
-        progressBar.setProgress((int) (progressBar.getMax() * monster.blood / monster.maxblood));
-        savedata();
-    }
-
-    void getUI() {
-        layout = findViewById(R.id.game);
-        m_blood = findViewById(R.id.monster_blood);
-        p_attack = findViewById(R.id.player_attack);
-        p_money = findViewById(R.id.player_money);
-        chapter_num = findViewById(R.id.chapter_num);
-        buy = findViewById(R.id.buy);
-        playerimg = findViewById(R.id.player);
-        monsterimg = findViewById(R.id.monster);
-        progressBar = findViewById(R.id.progress_blood);
-
-
-    }
-
-    void setListener() {
-        layout.setOnTouchListener(new View.OnTouchListener() {
-            @SuppressLint("ClickableViewAccessibility")
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getActionMasked()) {
-
-                    case MotionEvent.ACTION_DOWN:
-                    case MotionEvent.ACTION_POINTER_DOWN:
-                        monster = player.attack(monster);
-                        playerimg.setImageResource(Resourse.player_attack[(int) (Math.random() * Resourse.player_attack.length)]);
-                        if (monster.isdead()) {
-                            monster = monster.nextmonster(player.attack);
-                            monsterimg.setImageResource(Resourse.monsters[monster.num]);
-                            if (monster.num == 0) {//下一章
-                                chapter = chapter.nextchapter();
-                                layout.setBackgroundResource(chapter.bg);
-                                if (chapter.num == 0) {//下一周目
-                                    Chapter.turn++;
-                                }
-                                chapter_num.setText(new String(Chapter.turn + "周目" + "第" + (chapter.num + 1) + "章"));
-                                chapter.playbgm(game_main.this);
-                            }
-                        }
-                        updatePage();
-                        return true;
-
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_POINTER_UP:
-                        playerimg.setImageResource(R.drawable.player_stand);
-                        return true;
-
-                    case MotionEvent.ACTION_MOVE:
-                        return true;
-                }
-                return false;
-            }
-        });
-
-        buy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                while (player.attackup()) {
-                }
-                buy.setText(new String("升级￥" + player.attack));
-                updatePage();
-            }
-        });
-
-
     }
 }

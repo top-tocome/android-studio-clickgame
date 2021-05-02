@@ -10,6 +10,7 @@ import java.util.List;
 public class Player {
     long attack;
     long money;
+    long damage;
 
     Player(long attack, long money) {
         this.attack = attack;
@@ -27,9 +28,10 @@ public class Player {
 
 
     Monster attack(Monster monster) {
-        monster.blood -= attack * (Math.random() + 0.5);
+        damage = (long) (attack * (Math.random() + 0.5));
+        monster.blood -= damage;
         money += attack * (Math.random() + 0.5);
-        soundPool.play(kickId[(int) (Math.random() * Resourse.kick.length)], 0.5f, 0.5f, 0, 0, 1.5f);
+        playid((int) (Math.random() * Resourse.kick.length));
         return monster;
     }
 
@@ -45,8 +47,9 @@ public class Player {
         }
 
     }
-    void playid(int soundid){
-        soundPool.play(kickId[soundid], 0.5f, 0.5f, 0, 0, 1.5f);
+
+    void playid(int soundid) {
+        soundPool.play(kickId[soundid], 0.4f, 0.4f, 0, 0, 1.5f);
     }
 
 }
