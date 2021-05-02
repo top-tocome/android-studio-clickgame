@@ -6,8 +6,8 @@ public class Monster {
     long blood;
     long maxblood;
 
-    Monster(int num,long maxblood) {
-        this.num=num;
+    Monster(int num, long maxblood) {
+        this.num = num;
         this.maxblood = maxblood;
         blood = maxblood;
     }
@@ -16,8 +16,9 @@ public class Monster {
         return blood <= 0;
     }
 
-    Monster nextmonster(long attack){
-        maxblood += attack * (Math.random() * 10 + 20);
-        return new Monster((num + 1) % Resourse.monsters.length, maxblood);
+    void nextmonster(long bloodup) {
+        maxblood += bloodup * (Math.random() * 20 + 20);
+        num = (num + 1) % Resourse.monsters.length;
+        blood = maxblood;
     }
 }

@@ -119,15 +119,15 @@ public class game_main extends AppCompatActivity {
                     case MotionEvent.ACTION_DOWN:
                     case MotionEvent.ACTION_POINTER_DOWN:
                         //限制点击速度
-                        if (System.currentTimeMillis() - time < 100) return false;
+                        if (System.currentTimeMillis() - time < 75) return false;
                         else time = System.currentTimeMillis();
                         //攻击事件
-                        monster = player.attack(monster);
+                        player.attack(monster);
                         playerimg.setImageResource(Resourse.player_attack[(int) (Math.random() * Resourse.player_attack.length)]);
                         damage_anime.start(player.damage);
                         //死亡事件
                         if (monster.isdead()) {
-                            monster = monster.nextmonster(player.attack);
+                            monster.nextmonster(player.attack);
                             monsterimg.setImageResource(Resourse.monsters[monster.num]);
                             if (monster.num == 0) {//下一章
                                 chapter = chapter.nextchapter();
@@ -165,12 +165,26 @@ public class game_main extends AppCompatActivity {
                 buy.setText(new String("升级￥" + player.attack));
                 p_attack.setText(String.valueOf("攻击力：" + player.attack));
                 p_money.setText(String.valueOf("金钱：￥" + player.money));
+
+            }
+        });
+        findViewById(R.id.setting).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sp = getSharedPreferences("data", MODE_PRIVATE);
+                SettingDialog settingDialog = new SettingDialog(game_main.this, player, chapter, sp);
+                settingDialog.show();
             }
         });
 
-
+        findViewById(R.id.icon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                player.money *= 2;
+                p_money.setText(String.valueOf("金钱：￥" + player.money));
+            }
+        });
     }
-
 
     void getdata() {
         SharedPreferences sp = getSharedPreferences("data", MODE_PRIVATE);
@@ -182,6 +196,9 @@ public class game_main extends AppCompatActivity {
         player.attack = sp.getLong("player.attack", 1);
         player.money = sp.getLong("player.money", 0);
 
+
+        Chapter.volume = (float) sp.getInt("bgmvolumeprogress", 100) / 100;
+        player.volume = (float) sp.getInt("kickvolumeprogress", 100) / 100;
     }
 
     void savedata() {

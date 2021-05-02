@@ -20,10 +20,11 @@ public class Chapter {
     }
 
     MediaPlayer mediaPlayer;
+    static float volume;
 
     void playbgm(Context context) {
         mediaPlayer = MediaPlayer.create(context, bgm);
-        mediaPlayer.setVolume(0.7f, 0.7f);
+        mediaPlayer.setVolume(Chapter.volume, Chapter.volume);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
     }
@@ -33,4 +34,8 @@ public class Chapter {
         return Resourse.chapters[(num + 1) % Resourse.chapters.length];
     }
 
+    void setvolume(float volume) {
+        Chapter.volume=volume*0.7f;
+        mediaPlayer.setVolume(volume, volume);
+    }
 }

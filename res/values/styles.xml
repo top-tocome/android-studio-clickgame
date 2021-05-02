@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="damage_temp">
+        <item name="android:text">@string/none</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignTop">@+id/monster</item>
+        <item name="android:layout_alignEnd">@+id/monster</item>
+        <item name="android:layout_marginTop">50dp</item>
+        <item name="android:layout_marginEnd">30dp</item>
+        <item name="android:textColor">#ff0000</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:alpha">0</item>
+    </style>
+</resources>

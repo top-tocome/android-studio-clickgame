@@ -27,16 +27,16 @@ public class Player {
     }
 
 
-    Monster attack(Monster monster) {
+    void attack(Monster monster) {
         damage = (long) (attack * (Math.random() + 0.5));
         monster.blood -= damage;
         money += attack * (Math.random() + 0.5);
         playid((int) (Math.random() * Resourse.kick.length));
-        return monster;
     }
 
     SoundPool soundPool;
     int[] kickId = new int[Resourse.kick.length];
+    float volume;
 
     void setKickmusic(Context context) {
         SoundPool.Builder builder = new SoundPool.Builder();
@@ -49,9 +49,12 @@ public class Player {
     }
 
     void playid(int soundid) {
-        soundPool.play(kickId[soundid], 0.4f, 0.4f, 0, 0, 1.5f);
+        soundPool.play(kickId[soundid], volume, volume, 0, 0, 1.5f);
     }
 
+    void setvolume(float volume) {
+        this.volume = volume*0.5f;
+    }
 }
 
 
