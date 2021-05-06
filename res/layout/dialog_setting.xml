@@ -6,14 +6,15 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/Volumesetting"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:background="#999999"
             android:gravity="center"
@@ -25,23 +26,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5"
+            android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/bgmvolume"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:text="背景音"
-                android:gravity="center"/>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="背景音" />
 
             <SeekBar
                 android:id="@+id/bgmvolumeSeekBar"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="4"
                 android:max="100"
                 android:progress="100" />
 
@@ -50,42 +51,107 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5"
+            android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/kickvolume"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:text="打击音"
-                android:gravity="center"/>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="打击音" />
 
             <SeekBar
                 android:id="@+id/kickvolumeSeekBar"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="4"
                 android:max="100"
                 android:progress="100" />
 
         </LinearLayout>
-
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Volumesetting"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/close"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
-    </RelativeLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="下落时间"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/duration"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="判定范围"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/perfect"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="bpm"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/bpm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
 
 </RelativeLayout>
 

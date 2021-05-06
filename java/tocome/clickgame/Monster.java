@@ -16,8 +16,8 @@ public class Monster {
         return blood <= 0;
     }
 
-    void nextmonster(long bloodup) {
-        maxblood += bloodup * (Math.random() * 20 + 20);
+    void nextmonster(long maxcombo) {
+        maxblood += (maxcombo + 1) * maxcombo / 2;
         num = (num + 1) % Resourse.monsters.length;
         blood = maxblood;
     }

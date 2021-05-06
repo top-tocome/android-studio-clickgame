@@ -1,37 +1,30 @@
 package tocome.clickgame;
 
 import android.content.Context;
-import android.media.AudioAttributes;
 import android.media.SoundPool;
-import android.widget.ImageView;
-
-import java.util.List;
+import android.widget.TextView;
 
 public class Player {
     long attack;
-    long money;
+    long maxcombo;
     long damage;
 
-    Player(long attack, long money) {
+    Player(long attack, long maxcombo) {
         this.attack = attack;
-        this.money = money;
+        this.maxcombo = maxcombo;
     }
 
-    boolean attackup() {
-        if (money >= attack) {
-            money -= attack;
-            attack += 1;
-            return true;
+    void maxcombo(TextView comboView) {
+        if (maxcombo < attack) {
+            maxcombo = attack;
+            comboView.setText(String.valueOf("最大连击：" + maxcombo));
         }
-        return false;
     }
 
 
     void attack(Monster monster) {
         damage = (long) (attack * (Math.random() + 0.5));
         monster.blood -= damage;
-        money += attack * (Math.random() + 0.5);
-        playid((int) (Math.random() * Resourse.kick.length));
     }
 
     SoundPool soundPool;
@@ -53,7 +46,7 @@ public class Player {
     }
 
     void setvolume(float volume) {
-        this.volume = volume*0.5f;
+        this.volume = volume * 0.5f;
     }
 }
 

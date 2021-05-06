@@ -58,7 +58,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:text="@string/none" />
-
+    <!--伤害数字显示-->
     <TextView
         android:id="@+id/damage0"
         style="@style/damage_temp" />
@@ -118,7 +118,7 @@
         android:text="@string/none" />
 
     <Button
-        android:id="@+id/buy"
+        android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/state"
@@ -131,8 +131,138 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        app:srcCompat="@android:drawable/ic_menu_preferences" />
+        android:contentDescription="@string/none"
+        android:src="@drawable/note" />
 
+    <TextView
+        android:id="@+id/combo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/monster_blood"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="@string/none"
+        android:textColor="#ff0000"
+        android:textSize="20sp" />
+    <!--    note缓存-->
+    <ImageView
+        android:id="@+id/snare1"
+        style="@style/snare_down"
+        android:src="@drawable/note" />
+
+    <ImageView
+        android:id="@+id/snare2"
+        style="@style/snare_down"
+        android:src="@drawable/note" />
+
+    <ImageView
+        android:id="@+id/snare3"
+        style="@style/snare_down"
+        android:src="@drawable/note" />
+
+    <ImageView
+        android:id="@+id/snare4"
+        style="@style/snare_down"
+        android:src="@drawable/note" />
+
+    <ImageView
+        android:id="@+id/snare5"
+        style="@style/snare_down"
+        android:src="@drawable/note" />
+
+    <ImageView
+        android:id="@+id/hat1"
+        style="@style/hat_down"
+        android:src="@drawable/note" />
+
+    <ImageView
+        android:id="@+id/hat2"
+        style="@style/hat_down"
+        android:src="@drawable/note" />
+
+    <ImageView
+        android:id="@+id/hat3"
+        style="@style/hat_down"
+        android:src="@drawable/note" />
+
+    <ImageView
+        android:id="@+id/hat4"
+        style="@style/hat_down"
+        android:src="@drawable/note" />
+
+
+    <ImageView
+        android:id="@+id/hat5"
+        style="@style/hat_down"
+        android:src="@drawable/note" />
+
+
+    <ImageView
+        android:id="@+id/kick1"
+        style="@style/music_kick" />
+
+    <ImageView
+        android:id="@+id/kick2"
+        style="@style/music_kick" />
+
+    <ImageView
+        android:id="@+id/kick3"
+        style="@style/music_kick" />
+
+    <ImageView
+        android:id="@+id/kick4"
+        style="@style/music_kick" />
+
+    <ImageView
+        android:id="@+id/kick5"
+        style="@style/music_kick" />
+
+    <ImageView
+        android:id="@+id/clap1"
+        style="@style/music_clap" />
+
+    <ImageView
+        android:id="@+id/clap2"
+        style="@style/music_clap" />
+
+    <ImageView
+        android:id="@+id/clap3"
+        style="@style/music_clap" />
+
+    <ImageView
+        android:id="@+id/clap4"
+        style="@style/music_clap" />
+
+    <ImageView
+        android:id="@+id/clap5"
+        style="@style/music_clap" />
+
+    <!--    音游按键-->
+    <ImageView
+        android:id="@+id/kick"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="-15dp"
+        android:layout_toStartOf="@id/monster" />
+
+    <ImageView
+        android:id="@+id/snare"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/kick" />
+
+    <ImageView
+        android:id="@+id/hat"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@id/snare" />
+
+    <ImageView
+        android:id="@+id/clap"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@id/hat" />
 
 </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
