@@ -17,8 +17,10 @@ public class Monster {
     }
 
     void nextmonster(long maxcombo) {
-        maxblood += (maxcombo + 1) * maxcombo / 2;
-        num = (num + 1) % Resourse.monsters.length;
+        int combo = (int) Math.sqrt(maxblood * 2);
+        System.out.println(combo);
+        maxblood = (combo + (int) (Math.random() * 10 + 10))*(combo + (int) (Math.random() * 10 + 10)) ;
         blood = maxblood;
+        num = (num + 1) % Resourse.monsters.length;
     }
 }

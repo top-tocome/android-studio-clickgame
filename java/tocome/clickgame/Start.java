@@ -28,6 +28,7 @@ public class Start extends AppCompatActivity implements View.OnClickListener {
         newgame.setOnClickListener(this);
         latestgame.setOnClickListener(this);
         exit.setOnClickListener(this);
+        findViewById(R.id.startmenu).setBackgroundResource(Resourse.bg[(int) (Math.random() * Resourse.bg.length)]);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -35,8 +36,8 @@ public class Start extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.newgame:
-                SharedPreferences sp=getSharedPreferences("data",MODE_PRIVATE);
-                SharedPreferences.Editor editor=sp.edit();
+                SharedPreferences sp = getSharedPreferences("data", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
                 editor.clear();
                 editor.apply();
             case R.id.continuegame:

@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import java.util.Arrays;
 
 
-public class Music_button {
+public class Note {
 
     static final int up = 0;
     static final int down = 1;
@@ -22,7 +22,7 @@ public class Music_button {
     int num = 0;
 
 
-    Music_button(ImageView[] imageViews, Context context) {
+    Note(ImageView[] imageViews, Context context) {
         this.context = context;
         this.imageViews = imageViews;
         animations = new Animation[imageViews.length];
@@ -80,7 +80,7 @@ public class Music_button {
         num = (num + 1) % imageViews.length;
     }
 
-    static float perfect = 300;
+    static float perfect = 250;
 
     boolean level() {
         long min = 0;

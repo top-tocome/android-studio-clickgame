@@ -117,23 +117,6 @@
         android:layout_toEndOf="@+id/icon"
         android:text="@string/none" />
 
-    <Button
-        android:id="@+id/start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/state"
-        android:layout_alignBottom="@+id/icon"
-        android:text="@string/none" />
-
-    <ImageView
-        android:id="@+id/setting"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:contentDescription="@string/none"
-        android:src="@drawable/note" />
-
     <TextView
         android:id="@+id/combo"
         android:layout_width="wrap_content"
@@ -263,6 +246,23 @@
         android:layout_width="80dp"
         android:layout_height="match_parent"
         android:layout_toEndOf="@id/hat" />
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/state"
+        android:layout_alignBottom="@+id/icon"
+        android:text="@string/none" />
+
+    <ImageView
+        android:id="@+id/setting"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@string/none"
+        android:src="@drawable/note" />
 
 </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 

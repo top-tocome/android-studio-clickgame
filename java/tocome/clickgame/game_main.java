@@ -61,6 +61,11 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        savedata();
+    }
 
     void getUI() {
         layout = findViewById(R.id.game);
@@ -98,6 +103,7 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
     void setUI() {
         start.setText("开始游戏");
         p_attack.setText(String.valueOf("攻击力：" + player.attack));
+        p_money.setText(String.valueOf("最大连击：" + player.maxcombo));
         chapter_num.setText(new String(Chapter.turn + "周目" + "第" + (chapter.num + 1) + "章"));
 
         layout.setBackgroundResource(chapter.bg);
@@ -115,35 +121,35 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
         p_attack.setText(String.valueOf("攻击力：" + player.attack));
     }
 
-    Music_button[] music_buttons = new Music_button[4];
+    Note[] notes = new Note[4];
 
     void musicSetting() {
         ImageView[] kicks = new ImageView[Resourse.kick_temp.length];
         for (int i = 0; i < Resourse.kick_temp.length; i++) {
             kicks[i] = findViewById(Resourse.kick_temp[i]);
         }
-        music_buttons[0] = new Music_button(kicks, game_main.this);
+        notes[0] = new Note(kicks, game_main.this);
 
 
         ImageView[] claps = new ImageView[Resourse.clap_temp.length];
         for (int i = 0; i < Resourse.clap_temp.length; i++) {
             claps[i] = findViewById(Resourse.clap_temp[i]);
         }
-        music_buttons[1] = new Music_button(claps, game_main.this);
+        notes[1] = new Note(claps, game_main.this);
 
 
         ImageView[] snares = new ImageView[Resourse.snare_temp.length];
         for (int i = 0; i < Resourse.snare_temp.length; i++) {
             snares[i] = findViewById(Resourse.snare_temp[i]);
         }
-        music_buttons[2] = new Music_button(snares, game_main.this);
+        notes[2] = new Note(snares, game_main.this);
 
 
         ImageView[] hats = new ImageView[Resourse.hat_temp.length];
         for (int i = 0; i < Resourse.hat_temp.length; i++) {
             hats[i] = findViewById(Resourse.hat_temp[i]);
         }
-        music_buttons[3] = new Music_button(hats, game_main.this);
+        notes[3] = new Note(hats, game_main.this);
     }
 
     int button_num = 0;
@@ -172,7 +178,7 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
                         break;
                 }
 
-                if (music_buttons[button_num].level()) {
+                if (notes[button_num].level()) {
                     player.attack++;
                     player.maxcombo(p_money);
                     player.playid(button_num);
@@ -191,7 +197,7 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
         return false;
     }
 
-    static int bpm = 4;
+    static int bps = 4;
 
     void setListener() {
         findViewById(R.id.kick).setOnTouchListener(this);
@@ -212,16 +218,16 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
                         public void run() {
                             int ran = (int) (Math.random() * 4);
                             if (ran == 0) {
-                                music_buttons[ran].startdownmode();
+                                notes[ran].startdownmode();
                             } else if (ran == 1) {
-                                music_buttons[ran].startdownmode();
+                                notes[ran].startdownmode();
                             } else if (ran == 2) {
-                                music_buttons[ran].startdownmode();
+                                notes[ran].startdownmode();
                             } else {
-                                music_buttons[ran].startdownmode();
+                                notes[ran].startdownmode();
                             }
                         }
-                    }, 1000, 1000 / bpm);
+                    }, 1000, 1000 / bps);
                 } else {
                     start.setText("开始游戏");
                     timer.cancel();
@@ -277,6 +283,10 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
 
         Chapter.volume = (float) sp.getInt("bgmvolumeprogress", 100) / 100;
         player.volume = (float) sp.getInt("kickvolumeprogress", 100) / 100;
+
+        Note.duration = sp.getLong("duration", 1000);
+        Note.perfect = sp.getFloat("perfect", 250);
+        bps = sp.getInt("bps", 4);
     }
 
     void savedata() {

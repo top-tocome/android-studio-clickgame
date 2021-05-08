@@ -5,8 +5,8 @@
         android:fromXScale="180dp"
         android:fromYScale="60dp"
         android:interpolator="@android:anim/decelerate_interpolator"
-        android:pivotX="25"
-        android:pivotY="25"
+        android:pivotX="50%"
+        android:pivotY="50%"
         android:toXScale="90dp"
         android:toYScale="30dp" />
 
