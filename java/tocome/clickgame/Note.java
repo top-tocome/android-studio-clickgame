@@ -80,21 +80,27 @@ public class Note {
         num = (num + 1) % imageViews.length;
     }
 
-    static float perfect = 250;
+    static float perfect = 200;
+    static float miss = 400;
 
-    boolean level() {
-        long min = 0;
-
-        for (int i = 0; i < animations.length; i++) {
-            if (time[i] != 0) min = time[i];
-        }
+    float level() {
+        long min = System.currentTimeMillis();
+        int nownum = 0;
 
         for (int i = 0; i < animations.length; i++) {
             if (time[i] != 0 && time[i] < min) {
                 min = time[i];
+                nownum = i;
             }
         }
 
-        return (duration - System.currentTimeMillis() + min) < perfect && min != 0;
+        if ((duration - System.currentTimeMillis() + min) < perfect) {
+            imageViews[nownum].clearAnimation();
+            return perfect;
+        } else if ((duration - System.currentTimeMillis() + min) < miss) {
+            imageViews[nownum].clearAnimation();
+            return miss;
+        }
+        return 0;
     }
 }

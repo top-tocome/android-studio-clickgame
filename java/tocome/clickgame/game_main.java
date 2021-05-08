@@ -80,7 +80,7 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
         combo = findViewById(R.id.combo);
     }
 
-    Anime damage_anime;
+    Damage damage_anime;
 
     void Init() {
 
@@ -96,7 +96,7 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
         for (int i = 0; i < Resourse.damage_temp.length; i++) {
             damagetemp[i] = findViewById(Resourse.damage_temp[i]);
         }
-        damage_anime = new Anime(damagetemp, R.anim.damage, game_main.this);
+        damage_anime = new Damage(damagetemp, R.anim.damage, game_main.this);
         combo_anime = AnimationUtils.loadAnimation(game_main.this, R.anim.combo);
     }
 
@@ -178,12 +178,12 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
                         break;
                 }
 
-                if (notes[button_num].level()) {
+                if (notes[button_num].level() == Note.perfect) {
                     player.attack++;
                     player.maxcombo(p_money);
                     player.playid(button_num);
                     clicked_event();
-                } else {
+                } else if (notes[button_num].level() == Note.miss) {
                     player.attack = 0;
                     updatePage();
                 }
@@ -254,7 +254,7 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
         damage_anime.start(player.damage);
         //死亡事件
         if (monster.isdead()) {
-            monster.nextmonster(player.maxcombo);
+            monster.nextmonster();
             monsterimg.setImageResource(Resourse.monsters[monster.num]);
             if (monster.num == 0) {//下一章
                 chapter = chapter.nextchapter();
@@ -265,7 +265,6 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
                 chapter_num.setText(new String(Chapter.turn + "周目" + "第" + (chapter.num + 1) + "章"));
                 chapter.playbgm(game_main.this);
             }
-            savedata();
         }
         updatePage();
     }
@@ -285,7 +284,7 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
         player.volume = (float) sp.getInt("kickvolumeprogress", 100) / 100;
 
         Note.duration = sp.getLong("duration", 1000);
-        Note.perfect = sp.getFloat("perfect", 250);
+        Note.perfect = sp.getFloat("perfect", 200);
         bps = sp.getInt("bps", 4);
     }
 

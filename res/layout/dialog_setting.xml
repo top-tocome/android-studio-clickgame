@@ -99,8 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="number"
-                android:autofillHints="0-4000"
-                android:hint="0-4000"/>
+                android:hint="500-4000"/>
         </LinearLayout>
 
         <LinearLayout
@@ -122,8 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="numberDecimal"
-                android:autofillHints="0-500"
-                android:hint="0-500"/>
+                android:hint="0-300"/>
         </LinearLayout>
 
         <LinearLayout
@@ -145,8 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="number"
-                android:autofillHints="0-10"
-                android:hint="0-10"/>
+                android:hint="1-10"/>
 
         </LinearLayout>
     </LinearLayout>

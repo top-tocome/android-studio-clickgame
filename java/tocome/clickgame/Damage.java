@@ -6,12 +6,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-public class Anime {
+public class Damage {
     TextView[] textViews;
     Animation[] animations;
     int num = 0;
 
-    Anime(TextView[] textViews, int anim, Context context) {
+    Damage(TextView[] textViews, int anim, Context context) {
         this.textViews=textViews;
         animations = new Animation[textViews.length];
         for (int i = 0; i < animations.length; i++) {

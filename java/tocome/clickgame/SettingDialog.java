@@ -51,7 +51,7 @@ public class SettingDialog extends Dialog {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (!v.getText().toString().equals("")) {
                     long duration = Long.parseLong(v.getText().toString());
-                    if (duration > 0 && duration <= 4000) {
+                    if (duration >= 500 && duration <= 4000) {
                         Note.duration = Long.parseLong(v.getText().toString());
                         SharedPreferences.Editor editor = sp.edit();
                         editor.putLong("duration", Note.duration);
@@ -81,7 +81,7 @@ public class SettingDialog extends Dialog {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (!v.getText().toString().equals("")) {
                     float perfect = Float.parseFloat(v.getText().toString());
-                    if (perfect > 0 && perfect <= 500) {
+                    if (perfect > 0 && perfect <= 300) {
                         Note.perfect = perfect;
                         SharedPreferences.Editor editor = sp.edit();
                         editor.putFloat("perfect", Note.perfect);
