@@ -23,7 +23,7 @@ public class Player {
 
 
     void attack(Monster monster) {
-        damage = (long) (attack * (Math.random() + 0.5));
+        damage = (long) (attack * (Math.random()*(1+maxcombo/1000) + 0.5));
         monster.blood -= damage;
     }
 

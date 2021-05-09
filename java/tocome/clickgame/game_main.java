@@ -197,7 +197,7 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
         return false;
     }
 
-    static int bps = 4;
+    static int bps = 2;
 
     void setListener() {
         findViewById(R.id.kick).setOnTouchListener(this);
@@ -239,6 +239,8 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
         findViewById(R.id.setting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (start.getText().toString().equals("停止游戏"))
+                    start.callOnClick();
                 SharedPreferences sp = getSharedPreferences("data", MODE_PRIVATE);
                 SettingDialog settingDialog = new SettingDialog(game_main.this, player, chapter, sp);
                 settingDialog.show();
@@ -285,7 +287,7 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
 
         Note.duration = sp.getLong("duration", 1000);
         Note.perfect = sp.getFloat("perfect", 200);
-        bps = sp.getInt("bps", 4);
+        bps = sp.getInt("bps", 2);
     }
 
     void savedata() {

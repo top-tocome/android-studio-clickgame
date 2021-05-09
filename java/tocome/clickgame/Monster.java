@@ -18,7 +18,6 @@ public class Monster {
 
     void nextmonster() {
         int combo = (int) Math.sqrt(maxblood * 2);
-        System.out.println(combo);
         maxblood = (combo + (int) (Math.random() * 10 + 10)) * (combo + (int) (Math.random() * 10 + 10)) / 2;
         blood = maxblood;
         num = (num + 1) % Resourse.monsters.length;
