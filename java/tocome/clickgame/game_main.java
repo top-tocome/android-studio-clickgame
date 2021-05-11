@@ -22,7 +22,7 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
     Player player;
     Chapter chapter;
 
-    View layout;
+    View layout;//所有控件
     TextView m_blood;
     TextView p_attack;
     TextView p_money;
@@ -38,23 +38,23 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_main);
 
-        getUI();
-        Init();
-        setUI();
-        setListener();
-        musicSetting();
+        getUI();//获取ui控件
+        Init();//初始化参数
+        setUI();//设置初始ui
+        setListener();//设置监听
+        NoteSetting();//音符按键设置
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if (chapter.mediaPlayer.isPlaying()) {
+        if (chapter.mediaPlayer.isPlaying()) {//暂停播放背景音乐
             chapter.mediaPlayer.pause();
         }
     }
 
     @Override
-    protected void onRestart() {
+    protected void onRestart() {//继续播放背景音乐
         super.onRestart();
         if (chapter.mediaPlayer != null) {
             chapter.mediaPlayer.start();
@@ -62,12 +62,12 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy() {//保存数据
         super.onDestroy();
         savedata();
     }
 
-    void getUI() {
+    void getUI() {//获取ui控件
         layout = findViewById(R.id.game);
         m_blood = findViewById(R.id.monster_blood);
         p_attack = findViewById(R.id.player_attack);
@@ -123,7 +123,7 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
 
     Note[] notes = new Note[4];
 
-    void musicSetting() {
+    void NoteSetting() {
         ImageView[] kicks = new ImageView[Resourse.kick_temp.length];
         for (int i = 0; i < Resourse.kick_temp.length; i++) {
             kicks[i] = findViewById(Resourse.kick_temp[i]);
@@ -156,12 +156,12 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
 
     @SuppressLint({"ClickableViewAccessibility", "NonConstantResourceId"})
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
+    public boolean onTouch(View v, MotionEvent event) {//音符点击
 
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN:
-                switch (v.getId()) {
+                switch (v.getId()) {//判断点击的轨道
                     case R.id.kick:
                         button_num = 0;
                         break;
@@ -178,14 +178,14 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
                         break;
                 }
 
-                if (notes[button_num].level() == Note.perfect) {
+                if (notes[button_num].level() == Note.perfect) {//有效点击事件
                     player.attack++;
                     player.maxcombo(p_money);
                     player.playid(button_num);
-                    clicked_event();
-                } else if (notes[button_num].level() == Note.miss) {
+                    clicked_event();//主要点击事件
+                } else if (notes[button_num].level() == Note.miss) {//失败点击事件
                     player.attack = 0;
-                    updatePage();
+                    updatePage();//更新界面数据
                 }
                 return true;
             case MotionEvent.ACTION_UP:
@@ -215,7 +215,7 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
                 if (state) {
                     start.setText("停止游戏");
                     timer.schedule(new TimerTask() {
-                        public void run() {
+                        public void run() {//随机音符的创建
                             int ran = (int) (Math.random() * 4);
                             if (ran == 0) {
                                 notes[ran].startdownmode();
@@ -271,7 +271,7 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
         updatePage();
     }
 
-    void getdata() {
+    void getdata() {//读取数据
         SharedPreferences sp = getSharedPreferences("data", MODE_PRIVATE);
         Chapter.turn = sp.getInt("Chapter.turn", 1);
         chapter = Resourse.chapters[sp.getInt("chapter.num", 0)];
@@ -290,7 +290,7 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
         bps = sp.getInt("bps", 2);
     }
 
-    void savedata() {
+    void savedata() {//保存数据
         SharedPreferences sp = getSharedPreferences("data", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putInt("Chapter.turn", Chapter.turn);

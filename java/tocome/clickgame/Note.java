@@ -16,13 +16,13 @@ public class Note {
     static final int right = 3;
 
     Context context;
-    ImageView[] imageViews;
-    Animation[] animations;
-    long[] time;
-    int num = 0;
+    ImageView[] imageViews;//音符显示控件
+    Animation[] animations;//动画
+    long[] time;//记录对应系统时间
+    int num = 0;//最后一个播放的编号
 
 
-    Note(ImageView[] imageViews, Context context) {
+    Note(ImageView[] imageViews, Context context) {//构造函数
         this.context = context;
         this.imageViews = imageViews;
         animations = new Animation[imageViews.length];
@@ -52,9 +52,9 @@ public class Note {
         }
     }
 
-    static long duration = 1000;
+    static long duration = 1000;//下落时间
 
-    void start(int direction) {
+    void start(int direction) {//开始动画
         animations[num] = AnimationUtils.loadAnimation(context, Resourse.Music_anime[direction]);
         animations[num].setDuration(duration);
         imageViews[num].startAnimation(animations[num]);
@@ -80,10 +80,10 @@ public class Note {
         num = (num + 1) % imageViews.length;
     }
 
-    static float perfect = 200;
-    static float miss = 400;
+    static float perfect = 200;//有效点击时间范围
+    static float miss = 400;//点击失败时间范围
 
-    float level() {
+  float level() {//判定点击是否有效
         long min = System.currentTimeMillis();
         int nownum = 0;
 

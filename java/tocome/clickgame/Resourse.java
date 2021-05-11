@@ -1,7 +1,7 @@
 package tocome.clickgame;
 
 public class Resourse {
-    static int[] monsters = new int[]{
+    static int[] monsters = new int[]{//怪物图片
             R.mipmap.monster_00,
             R.mipmap.monster_01,
             R.mipmap.monster_02,
@@ -10,7 +10,7 @@ public class Resourse {
             R.mipmap.monster_05,
             R.mipmap.monster_06
     };
-    static int[] bgm = new int[]{
+    static int[] bgm = new int[]{//背景音乐
             R.raw.bgm_00,
             R.raw.bgm_01,
             R.raw.bgm_02,

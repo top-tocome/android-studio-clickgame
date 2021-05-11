@@ -11,10 +11,10 @@ import android.widget.Button;
 
 public class Start extends AppCompatActivity implements View.OnClickListener {
 
-    Button newgame;
-    Button latestgame;
-    Button exit;
-    Intent game;
+    Button newgame;//新游戏
+    Button latestgame;//继续游戏
+    Button exit;//退出
+    Intent game;//游戏主界面
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

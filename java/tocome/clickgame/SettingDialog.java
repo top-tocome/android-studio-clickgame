@@ -12,11 +12,11 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class SettingDialog extends Dialog {
-    Player player;
-    Chapter chapter;
-    SharedPreferences sp;
+    Player player;//玩家
+    Chapter chapter;//章节
+    SharedPreferences sp;//数据保存
 
-    public SettingDialog(Context context, Player player, Chapter chapter, SharedPreferences sp) {
+    public SettingDialog(Context context, Player player, Chapter chapter, SharedPreferences sp) {//构造函数
         super(context);
         this.player = player;
         this.chapter = chapter;
@@ -38,7 +38,11 @@ public class SettingDialog extends Dialog {
         });
 
         volumeSetting();
+        NoteSetting();
 
+    }
+
+    private void NoteSetting() {//音符判定设置
         TextView duration = findViewById(R.id.duration);
         TextView bpm = findViewById(R.id.bpm);
         TextView perfect = findViewById(R.id.perfect);
@@ -91,10 +95,9 @@ public class SettingDialog extends Dialog {
                 return false;
             }
         });
-
     }
 
-    private void volumeSetting() {
+    private void volumeSetting() {//音量设置
         SeekBar bgmvolume = findViewById(R.id.bgmvolumeSeekBar);
         SeekBar kickvolume = findViewById(R.id.kickvolumeSeekBar);
 

@@ -7,11 +7,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 public class Damage {
-    TextView[] textViews;
-    Animation[] animations;
-    int num = 0;
+    TextView[] textViews;//数值显示控件
+    Animation[] animations;//动画
+    int num = 0;//最后一个播放的控件编号
 
-    Damage(TextView[] textViews, int anim, Context context) {
+    Damage(TextView[] textViews, int anim, Context context) {//构造函数
         this.textViews=textViews;
         animations = new Animation[textViews.length];
         for (int i = 0; i < animations.length; i++) {
@@ -37,7 +37,7 @@ public class Damage {
     }
 
     @SuppressLint("SetTextI18n")
-    void start(long damage) {
+    void start(long damage) {//开始播放
         textViews[num].setText("-" + damage);
         textViews[num].startAnimation(animations[num]);
         num = (num + 1) % textViews.length;
