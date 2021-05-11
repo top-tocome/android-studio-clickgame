@@ -23,7 +23,7 @@ public class Player {
 
 
     void attack(Monster monster) {//攻击事件
-        damage = (long) (attack * (Math.random()*(1+maxcombo/1000) + 0.5));
+        damage = (long) (attack * (Math.random() * (1 + (float) maxcombo / 1000) + 0.5));
         monster.blood -= damage;
     }
 
@@ -40,10 +40,12 @@ public class Player {
         }
 
     }
+
     //播放指定音效
     void playid(int soundid) {
         soundPool.play(kickId[soundid], volume, volume, 0, 0, 1.5f);
     }
+
     //设置音量
     void setvolume(float volume) {
         this.volume = volume * 0.5f;

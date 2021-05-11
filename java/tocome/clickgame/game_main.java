@@ -48,17 +48,7 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
     @Override
     protected void onStop() {
         super.onStop();
-        if (chapter.mediaPlayer.isPlaying()) {//暂停播放背景音乐
-            chapter.mediaPlayer.pause();
-        }
-    }
-
-    @Override
-    protected void onRestart() {//继续播放背景音乐
-        super.onRestart();
-        if (chapter.mediaPlayer != null) {
-            chapter.mediaPlayer.start();
-        }
+        if (state) start.callOnClick();
     }
 
     @Override
@@ -89,7 +79,6 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
         chapter = Resourse.chapters[0];
 
         getdata();
-        chapter.playbgm(game_main.this);
         player.setKickmusic(game_main.this);
 
         TextView[] damagetemp = new TextView[Resourse.damage_temp.length];
@@ -198,6 +187,7 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
     }
 
     static int bps = 2;
+    boolean state = false;
 
     void setListener() {
         findViewById(R.id.kick).setOnTouchListener(this);
@@ -206,32 +196,23 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
         findViewById(R.id.hat).setOnTouchListener(this);
 
         start.setOnClickListener(new View.OnClickListener() {
-            boolean state = true;
             Timer timer = new Timer();
 
             @Override
             public void onClick(View v) {
-
-                if (state) {
+                if (!state) {//开始游戏
                     start.setText("停止游戏");
+                    chapter.bgmStart(game_main.this);
                     timer.schedule(new TimerTask() {
                         public void run() {//随机音符的创建
-                            int ran = (int) (Math.random() * 4);
-                            if (ran == 0) {
-                                notes[ran].startdownmode();
-                            } else if (ran == 1) {
-                                notes[ran].startdownmode();
-                            } else if (ran == 2) {
-                                notes[ran].startdownmode();
-                            } else {
-                                notes[ran].startdownmode();
-                            }
+                            notes[(int) (Math.random() * 4)].startdownmode();
                         }
                     }, 1000, 1000 / bps);
-                } else {
+                } else {//停止游戏
                     start.setText("开始游戏");
                     timer.cancel();
                     timer = new Timer();
+                    chapter.bgmPause();
                 }
                 state = !state;
             }
@@ -239,8 +220,7 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
         findViewById(R.id.setting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (start.getText().toString().equals("停止游戏"))
-                    start.callOnClick();
+                if (state) start.callOnClick();
                 SharedPreferences sp = getSharedPreferences("data", MODE_PRIVATE);
                 SettingDialog settingDialog = new SettingDialog(game_main.this, player, chapter, sp);
                 settingDialog.show();
@@ -265,7 +245,6 @@ public class game_main extends AppCompatActivity implements View.OnTouchListener
                     Chapter.turn++;
                 }
                 chapter_num.setText(new String(Chapter.turn + "周目" + "第" + (chapter.num + 1) + "章"));
-                chapter.playbgm(game_main.this);
             }
         }
         updatePage();

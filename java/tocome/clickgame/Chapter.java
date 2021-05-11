@@ -22,11 +22,19 @@ public class Chapter {
     MediaPlayer mediaPlayer;//音频播放器
     static float volume;//音量
 
-    void playbgm(Context context) {//播放背景音乐
-        mediaPlayer = MediaPlayer.create(context, bgm);
-        mediaPlayer.setVolume(Chapter.volume, Chapter.volume);
-        mediaPlayer.setLooping(true);
+    void bgmStart(Context context) {//播放背景音乐
+        if (mediaPlayer == null) {
+            mediaPlayer = MediaPlayer.create(context, bgm);
+            mediaPlayer.setVolume(Chapter.volume, Chapter.volume);
+            mediaPlayer.setLooping(true);
+        }
         mediaPlayer.start();
+    }
+
+    void bgmPause() {
+        if (mediaPlayer.isPlaying()) {//暂停播放背景音乐
+            mediaPlayer.pause();
+        }
     }
 
     Chapter nextchapter() {//切换下一章
@@ -35,7 +43,7 @@ public class Chapter {
     }
 
     void setvolume(float volume) {//设置音量
-        Chapter.volume=volume*0.7f;
+        Chapter.volume = volume * 0.7f;
         mediaPlayer.setVolume(volume, volume);
     }
 }

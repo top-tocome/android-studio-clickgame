@@ -10,8 +10,12 @@
         android:theme="@style/Theme.Clickgame"
 
         >
-        <activity android:name=".game_main"/>
-        <activity android:name=".Start">
+        <activity
+            android:name=".game_main"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Start"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
