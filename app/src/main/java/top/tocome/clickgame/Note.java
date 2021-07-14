@@ -1,4 +1,4 @@
-package tocome.clickgame;
+package top.tocome.clickgame;
 
 import android.content.Context;
 import android.view.animation.Animation;

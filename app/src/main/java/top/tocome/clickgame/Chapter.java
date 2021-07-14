@@ -1,11 +1,7 @@
-package tocome.clickgame;
+package top.tocome.clickgame;
 
 import android.content.Context;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.widget.RelativeLayout;
-
-import java.io.IOException;
 
 public class Chapter {
     static int turn = 1;//周目

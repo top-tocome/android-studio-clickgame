@@ -1,4 +1,4 @@
-package tocome.clickgame;
+package top.tocome.clickgame;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package tocome.clickgame;
+package top.tocome.clickgame;
 
 public class Resourse {
     static int[] monsters = new int[]{//怪物图片

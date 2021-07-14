@@ -1,4 +1,10 @@
-res/drawable
-res/raw
-res/mipmap
-res/mipmap-xhdpi
+#project
+/.gradle/
+/.idea/
+/build/
+local.properties
+
+#resourse
+*.jpg
+*.png
+*.ogg

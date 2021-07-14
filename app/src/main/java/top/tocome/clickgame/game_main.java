@@ -1,4 +1,4 @@
-package tocome.clickgame;
+package top.tocome.clickgame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
